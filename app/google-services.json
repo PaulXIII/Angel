@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1056321779198",
+    "firebase_url": "https://angel-2c53c.firebaseio.com",
+    "project_id": "angel-2c53c",
+    "storage_bucket": "angel-2c53c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056321779198:android:fd63308bc4e466131ebcaf",
+        "android_client_info": {
+          "package_name": "com.androidacademy.angel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056321779198-hon8vv884hgekkt6glgtsd3l4rulhni7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnaDWovKHGN_nwenPfx8nCB_iXRz_LsVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056321779198-hon8vv884hgekkt6glgtsd3l4rulhni7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
