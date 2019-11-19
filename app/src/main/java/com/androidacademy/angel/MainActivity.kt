@@ -5,15 +5,11 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.androidacademy.angel.data.AdvertModel
-import com.androidacademy.angel.fragments.FragmentList
-import com.androidacademy.angel.fragments.LoginFragment
 import com.androidacademy.angel.network.Repository
-import com.androidacademy.angel.viewModels.GlobalViewModel
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var globalViewModel: GlobalViewModel
+    val globalViewModel: FragmentController = FragmentController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +24,19 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        globalViewModel = ViewModelProviders.of(this).get(GlobalViewModel::class.java)
-        globalViewModel.nextFragment.observe(this, Observer<FragmentList> {
-            lateinit var nextFragment: Fragment
-            when (it!!) {
-                FragmentList.Login -> nextFragment = LoginFragment()
-            }
+        globalViewModel.nextFragment.observe(this, Observer<Fragment> {
+            if (it == null)
+                throw IllegalArgumentException("Fragment can't be null")
+
             supportFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)
                 .replace(
-                    R.id.base_fragment_layout, nextFragment
+                    R.id.base_fragment_layout, it
                 )
                 .commit()
         })
 
-        globalViewModel.pushNextFragmentName(FragmentList.Login)
+        globalViewModel.openLogin()
     }
 }
