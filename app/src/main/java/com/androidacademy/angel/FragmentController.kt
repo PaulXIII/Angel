@@ -16,4 +16,8 @@ class FragmentController {
     internal fun openLogin(){
         pushNextFragment(LoginFragment())
     }
+
+    internal fun openAdvertisementList(){
+
+    }
 }
