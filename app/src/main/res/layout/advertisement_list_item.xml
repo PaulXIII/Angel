@@ -4,16 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/ad_list_item_height"
+    android:padding="@dimen/ad_list_item_padding"
     tools:context=".MainActivity">
 
 
     <TextView
         android:id="@+id/ad_list_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Title"
+        android:layout_width="@dimen/zero_dp"
+        android:layout_height="@dimen/list_item_content_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ad_list_item_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <ImageView
+        android:id="@+id/ad_list_item_photo"
+        android:layout_width="@dimen/list_item_content_size"
+        android:layout_height="@dimen/list_item_content_size"
+        android:contentDescription="@string/photo"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
