@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.androidacademy.angel.FragmentController
 import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
@@ -41,18 +42,10 @@ class LoginFragment: Fragment() {
         })
 
         viewModel.logInEvent.observe(this, Observer {isSuccess ->
-            var string = ""
             if(isSuccess){
-                fragmentManager?.let {
-                    val fragment = AdvertisementFragmentList()
-                    it
-                        .beginTransaction()
-                        .replace(R.id.base_fragment_layout, fragment)
-                        .commit()
-                }
+                (activity as MainActivity).fragmentController.openAdvertisementList()
             }else{
-                string = getString(R.string.log_in_error)
-                Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, getString(R.string.log_in_error), Toast.LENGTH_LONG).show()
             }
 
         })

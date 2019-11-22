@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
+import com.androidacademy.angel.data.AdvertModel
+import com.androidacademy.angel.details.DetailsFragment
 import com.androidacademy.angel.login.LoginFragment
 import com.androidacademy.angel.registration.RegistrationFragment
 
@@ -25,5 +27,9 @@ class FragmentController {
 
     internal fun openAdvertisementList() {
         pushNextFragment(AdvertisementFragmentList())
+    }
+
+    internal fun openDetails(advertModel: AdvertModel){
+        pushNextFragment(DetailsFragment.newInstance(advertModel))
     }
 }

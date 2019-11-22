@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
 import com.androidacademy.angel.data.AdvertModel
 import com.androidacademy.angel.details.DetailsFragment
@@ -18,13 +19,7 @@ import com.androidacademy.angel.details.DetailsFragment
 class AdvertisementFragmentList : Fragment(), OnAdvertClick {
     override fun onClick(ad: AdvertModel) {
         fragmentManager?.let {
-            val fragment = DetailsFragment.newInstance(ad)
-            it.beginTransaction()
-                .addToBackStack(null)
-                .replace(
-                    R.id.base_fragment_layout, fragment
-                )
-                .commit()
+            (activity as MainActivity).fragmentController.openDetails(ad)
         }
     }
 
