@@ -9,7 +9,7 @@ import com.androidacademy.angel.data.AdvertModel
 import com.androidacademy.angel.network.Repository
 
 class MainActivity : AppCompatActivity() {
-    val globalViewModel: FragmentController = FragmentController()
+   val globalViewModel: FragmentController = FragmentController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
