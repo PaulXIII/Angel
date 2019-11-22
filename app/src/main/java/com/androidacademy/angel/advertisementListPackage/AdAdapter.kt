@@ -1,4 +1,4 @@
-package com.androidacademy.angel.data.advertisementListHelpers
+package com.androidacademy.angel.advertisementListPackage
 
 import android.graphics.Bitmap
 import android.view.LayoutInflater
@@ -6,14 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.androidacademy.angel.R
 import com.androidacademy.angel.data.AdvertModel
-import com.androidacademy.angel.network.DownloadImageTask
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 
-class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Bitmap) :
-    RecyclerView.Adapter<ViewHolder>() {
+class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int) :
+    ListAdapter<AdvertModel, ViewHolder>(
+        AdListDiffUtil()
+    ) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -37,8 +42,12 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val title: TextView = itemView.findViewById(R.id.ad_list_item_title)
     private val photo: ImageView = itemView.findViewById(R.id.ad_list_item_photo)
 
-    fun bind(ad: AdvertModel, placeHolder: Bitmap) {
+    fun bind(ad: AdvertModel, placeHolder: Int) {
         title.text = ad.title
-        DownloadImageTask(photo, placeHolder).execute(ad.url)
+        Glide
+            .with(itemView)
+            .applyDefaultRequestOptions(RequestOptions.placeholderOf(placeHolder))
+            .load(ad.url)
+            .into(photo)
     }
 }
