@@ -9,8 +9,8 @@ import java.util.*
     fun createCalendarEvent(context: Context,advertModel: AdvertModel) {
 
 
-        val begindate:Date=advertModel.startTime
-        val enddate:Date=advertModel.endTime
+        val begindate:Date=advertModel.nextEvent?.startTime!!
+        val enddate:Date=advertModel.nextEvent?.endTime!!
         val beginTime = Calendar.getInstance()
         beginTime.time=begindate
 
