@@ -24,7 +24,6 @@ class AdvertisementFragmentList : Fragment(), OnAdvertClick {
     }
 
     private lateinit var parentActivity: AppCompatActivity
-    private lateinit var placeHolder: Bitmap
     private lateinit var adListAdapter: AdAdapter
 
     override fun onCreateView(

@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.androidacademy.angel.MainActivity
 
 import com.androidacademy.angel.R
 import com.androidacademy.angel.databinding.RegistrationFragmentBinding
@@ -60,13 +61,12 @@ class RegistrationFragment : Fragment() {
         })
 
         viewModel.registrationEvent.observe(this, Observer {isSuccess ->
-            var string = ""
             if(isSuccess){
-                string = "Успех"
+                (this.activity as MainActivity).fragmentController.openAdvertisementList()
             }else{
-                string = getString(R.string.registration_error)
+                var string = getString(R.string.registration_error)
+                Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
             }
-            Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
 
         })
 
