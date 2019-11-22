@@ -9,4 +9,7 @@
     <string name="password">Пароль</string>
     <string name="log_in">Вход</string>
     <string name="registration">Регистрация</string>
+    <string name="registration_in_sys">Регистрация в системе</string>
+    <string name="confirm_password">Подтвердить пароль</string>
+    <string name="log_up">Зарегистрироваться</string>
 </resources>
