@@ -73,6 +73,5 @@ dependencies {
     //material design
     implementation 'com.google.android.material:material:1.2.0-alpha01'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
-
 }
 apply plugin: 'com.google.gms.google-services'
