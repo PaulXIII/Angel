@@ -1,5 +1,7 @@
 package com.androidacademy.angel.adding
 
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +32,7 @@ class NewPersonFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NewPersonViewModel::class.java)
-        viewModel.photoUrl.observe(this, Observer { url -> loadImage(url) })
+        viewModel.photoBitmap.observe(this, Observer { image -> loadImage(image) })
 
         publish.setOnClickListener{
             viewModel.publish(title= title.text.toString(), description= description.text.toString())
@@ -41,11 +43,18 @@ class NewPersonFragment : Fragment(){
         }
 
         take_photo.setOnClickListener{
-            viewModel.takePhoto()
+            activity?.let {
+                viewModel.takePhoto(this, it.packageManager)
+            }
         }
     }
 
-    fun loadImage(url: String?) {
-        Glide.with(this).load(url).placeholder(R.drawable.angel_logo).into(photo)
+    fun loadImage(image: Bitmap?) {
+        Glide.with(this).load(image).placeholder(R.drawable.angel_logo).into(photo)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        viewModel.onActivityResult(requestCode, resultCode, data)
     }
 }
