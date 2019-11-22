@@ -8,27 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.androidacademy.angel.R
+import com.androidacademy.angel.data.AdvertModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.details_fragment.*
 
 class DetailsFragment : Fragment() {
     companion object {
-        private const val PHOTO_URL = "url"
-        private const val TITLE = "title"
-        private const val DESCRIPTION = "description"
+        private const val ADVERT_MODEL = "AdvertModel"
 
-        fun newInstance(photo: String, title: String, description: String = "" ): Fragment {
+        fun newInstance(advertModel: AdvertModel): Fragment {
             val fragment = DetailsFragment()
             val bundle = Bundle()
-            bundle.putString(PHOTO_URL, photo)
-            bundle.putString(TITLE, title)
-            bundle.putString(DESCRIPTION, description)
+            bundle.putParcelable(ADVERT_MODEL, advertModel)
             fragment.arguments = bundle
             return fragment
         }
     }
 
     private lateinit var viewModel: DetailsViewModel
+    private var advertModel: AdvertModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,25 +38,26 @@ class DetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        arguments?.getString(PHOTO_URL)?.let {
+        advertModel = arguments?.getParcelable<AdvertModel>(ADVERT_MODEL)
+
+        advertModel?.let {
             Glide
                 .with(this)
-                .load(it)
+                .load(it.url)
                 .centerCrop()
-                .placeholder(R.drawable.common_full_open_on_phone) //TODO use Angel placeholder
-                .into(photo)
-        }
+                .placeholder(R.drawable.angel_logo)
+                .into(details_photo)
 
-        arguments?.getString(TITLE)?.let {
-            title.text = it
-        }
-
-        arguments?.getString(DESCRIPTION)?.let {
-            description.text = it
+            title.text = it.title
+            description.text = it.description
+            if (it.nextEvent == null)
+                add_to_calendar.hide()
         }
 
         add_to_calendar.setOnClickListener{
-            viewModel.addToCalendar()
+            advertModel?.let {
+                viewModel.addToCalendar(it)
+            }
         }
 
         viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)

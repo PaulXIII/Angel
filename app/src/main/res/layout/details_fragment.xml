@@ -15,7 +15,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/photo"
+                android:id="@+id/details_photo"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:contentDescription="photo"
@@ -32,7 +32,7 @@
                 android:layout_marginTop="15dp"
                 android:textSize="32dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/photo"
+                app:layout_constraintTop_toBottomOf="@+id/details_photo"
                 tools:text="Title" />
 
             <TextView
