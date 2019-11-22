@@ -6,15 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.androidacademy.angel.login.LogInViewModel" />
+            type="com.androidacademy.angel.registration.RegistrationViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
-
+        tools:context=".registration.RegistrationFragment">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -24,39 +22,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/registration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/registration"
-                    android:onClick="@{() -> viewModel.moveToRegistration()}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/log_in" />
-
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/enter_to_system"
+                    android:text="@string/registration_in_sys"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
-                    app:srcCompat="@drawable/angel_logo" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
@@ -68,14 +43,14 @@
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView">
+                    app:layout_constraintTop_toBottomOf="@+id/title">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:text="@={viewModel.email}"
                         app:emailFocusChanged="@{viewModel}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="@string/email" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,22 +71,47 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password"
-                        app:passwordFocusChanged="@{viewModel}"
                         android:text="@={viewModel.password}"
-                        android:inputType="textPassword" />
+                        app:passwordFocusChanged="@{viewModel}"
+                        android:inputType="textPassword"
+                        android:hint="@string/password" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirmPasswordlLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:errorEnabled="true"
+                    app:endIconMode="password_toggle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        app:confirmPasswordFocusChanged="@{viewModel}"
+                        android:text="@={viewModel.confirmPassword}"
+                        android:hint="@string/confirm_password" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/log_in"
-                    android:layout_width="0dp"
+                    android:id="@+id/registration"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/log_in"
-                    android:onClick="@{() -> viewModel.logIn()}"
-                    app:layout_constraintEnd_toEndOf="@+id/registration"
-                    app:layout_constraintStart_toStartOf="@+id/registration"
-                    app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/log_up"
+                    android:onClick="@{() -> viewModel.register()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/confirmPasswordlLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
