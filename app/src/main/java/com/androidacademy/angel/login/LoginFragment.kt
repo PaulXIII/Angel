@@ -40,13 +40,12 @@ class LoginFragment: Fragment() {
         })
 
         viewModel.logInEvent.observe(this, Observer {isSuccess ->
-            var string = ""
             if(isSuccess){
-                string = "Успех"
+                (this.activity as MainActivity).fragmentController.openAdvertisementList()
             }else{
-                string = getString(R.string.log_in_error)
+                var string: String = getString(R.string.log_in_error)
+                Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
             }
-            Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
 
         })
 
