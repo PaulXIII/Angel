@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.androidacademy.angel.login.LogInViewModel" />
@@ -26,12 +27,11 @@
 
                 <Button
                     android:id="@+id/registration"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/registration"
+                    android:layout_margin="16dp"
                     android:onClick="@{() -> viewModel.moveToRegistration()}"
+                    android:text="@string/registration"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
@@ -74,9 +74,9 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="@string/email"
                         android:text="@={viewModel.email}"
-                        app:emailFocusChanged="@{viewModel}"
-                        android:hint="@string/email" />
+                        app:emailFocusChanged="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -86,8 +86,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    app:errorEnabled="true"
                     app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/emailLayout">
@@ -97,9 +97,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/password"
-                        app:passwordFocusChanged="@{viewModel}"
+                        android:inputType="textPassword"
                         android:text="@={viewModel.password}"
-                        android:inputType="textPassword" />
+                        app:passwordFocusChanged="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -107,8 +107,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/log_in"
                     android:onClick="@{() -> viewModel.logIn()}"
+                    android:text="@string/log_in"
                     app:layout_constraintEnd_toEndOf="@+id/registration"
                     app:layout_constraintStart_toStartOf="@+id/registration"
                     app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />

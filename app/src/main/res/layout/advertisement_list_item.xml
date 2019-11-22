@@ -3,15 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/ad_list_item_height"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:minHeight="@dimen/ad_list_item_height"
     android:padding="@dimen/ad_list_item_padding"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/ad_list_item_title"
         android:layout_width="@dimen/zero_dp"
         android:layout_height="@dimen/list_item_content_size"
+        android:layout_marginStart="8dp"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ad_list_item_photo"
@@ -19,6 +26,7 @@
         tools:text="Title" />
 
     <ImageView
+
         android:id="@+id/ad_list_item_photo"
         android:layout_width="@dimen/list_item_content_size"
         android:layout_height="@dimen/list_item_content_size"

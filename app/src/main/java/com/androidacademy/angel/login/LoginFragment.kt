@@ -1,7 +1,6 @@
 package com.androidacademy.angel.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +9,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.androidacademy.angel.FragmentController
 import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
-import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
 import com.androidacademy.angel.databinding.LoginFragmentBinding
-import com.androidacademy.angel.network.Repository
-import com.androidacademy.angel.prefs
-import kotlinx.android.synthetic.main.login_fragment.view.*
 
-class LoginFragment: Fragment() {
+class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,39 +27,36 @@ class LoginFragment: Fragment() {
         binding.lifecycleOwner = this
 
 
-        viewModel.registationEvent.observe(this, Observer {event ->
-            if(event){
+        viewModel.registationEvent.observe(viewLifecycleOwner, Observer { event ->
+            if (event) {
                 (activity as MainActivity).fragmentController.openRegistration()
                 viewModel.resetEvent()
             }
-
         })
 
-        viewModel.logInEvent.observe(this, Observer {isSuccess ->
-            if(isSuccess){
-                (activity as MainActivity).fragmentController.openAdvertisementList()
-            }else{
-                Toast.makeText(activity, getString(R.string.log_in_error), Toast.LENGTH_LONG).show()
+        viewModel.logInEvent.observe(viewLifecycleOwner, Observer { isSuccess ->
+            if (isSuccess) {
+                (this.activity as MainActivity).fragmentController.openAdvertisementList()
+            } else {
+                val string: String = getString(R.string.log_in_error)
+                Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
             }
-
         })
 
-        viewModel.emailIsValid.observe(this, Observer {isValid ->
-            if(isValid){
+        viewModel.emailIsValid.observe(viewLifecycleOwner, Observer { isValid ->
+            if (isValid) {
                 binding.emailLayout.isErrorEnabled = false
             } else {
                 binding.emailLayout.error = getString(R.string.wrong_email)
             }
-
         })
 
-        viewModel.passwordIsValid.observe(this, Observer {isValid ->
-            if(isValid){
+        viewModel.passwordIsValid.observe(viewLifecycleOwner, Observer { isValid ->
+            if (isValid) {
                 binding.passwordLayout.isErrorEnabled = false
-            }else{
-                binding.passwordLayout.error  = getString(R.string.short_password)
+            } else {
+                binding.passwordLayout.error = getString(R.string.short_password)
             }
-
         })
 
         return binding.root
