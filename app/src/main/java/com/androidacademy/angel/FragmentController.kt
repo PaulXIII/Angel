@@ -3,6 +3,8 @@ package com.androidacademy.angel
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
+import com.androidacademy.angel.fragments.LoginFragment
 import com.androidacademy.angel.login.LoginFragment
 import com.androidacademy.angel.registration.RegistrationFragment
 
@@ -14,11 +16,15 @@ class FragmentController {
         goToNextFragment.value = newFragment
     }
 
-    internal fun openLogin(){
+    internal fun openLogin() {
         pushNextFragment(LoginFragment())
     }
 
     internal fun openRegistration(){
         pushNextFragment(RegistrationFragment())
+    }
+
+    internal fun openAdvertisementList() {
+        pushNextFragment(AdvertisementFragmentList())
     }
 }
