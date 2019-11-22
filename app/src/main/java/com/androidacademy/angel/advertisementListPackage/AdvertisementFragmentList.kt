@@ -16,7 +16,6 @@ import com.androidacademy.angel.R
 class AdvertisementFragmentList : Fragment() {
 
     private lateinit var parentActivity: AppCompatActivity
-    private lateinit var placeHolder: Bitmap
     private lateinit var adListAdapter: AdAdapter
 
     override fun onCreateView(
@@ -40,7 +39,7 @@ class AdvertisementFragmentList : Fragment() {
         adListAdapter =
             AdAdapter(
                 listOf(),
-                R.drawable.angel_logo
+                R.drawable.logo_square
             )
     }
 }
