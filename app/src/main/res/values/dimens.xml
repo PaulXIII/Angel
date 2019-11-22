@@ -4,4 +4,7 @@
     <dimen name="ad_list_item_padding">3dp</dimen>
     <dimen name="list_item_content_size">90dp</dimen>
     <dimen name="zero_dp">0dp</dimen>
+    <dimen name="dp5">5dp</dimen>
+    <dimen name="dp20">20dp</dimen>
+    <dimen name="dp50">50dp</dimen>
 </resources>
