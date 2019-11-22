@@ -23,7 +23,7 @@ class LoginFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:LoginFragmentBinding =
+        val binding: LoginFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
 
         val viewModel = ViewModelProviders.of(this).get(LogInViewModel::class.java)
@@ -33,7 +33,7 @@ class LoginFragment: Fragment() {
 
         viewModel.registationEvent.observe(this, Observer {event ->
             if(event){
-                (activity as MainActivity).globalViewModel.openRegistration()
+                (activity as MainActivity).fragmentController.openRegistration()
                 viewModel.resetEvent()
             }
 
