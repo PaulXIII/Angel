@@ -13,7 +13,7 @@ import com.androidacademy.angel.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.add_new_fragment.*
 
-class NewPersonFragment : Fragment(){
+class NewPersonFragment : Fragment() {
     companion object {
         fun newInstance(): Fragment {
             return NewPersonFragment()
@@ -34,15 +34,20 @@ class NewPersonFragment : Fragment(){
         viewModel = ViewModelProviders.of(this).get(NewPersonViewModel::class.java)
         viewModel.photoBitmap.observe(this, Observer { image -> loadImage(image) })
 
-        publish.setOnClickListener{
-            viewModel.publish(title= title.text.toString(), description= description.text.toString())
+        publish.setOnClickListener {
+            viewModel.publish(
+                title = title.text.toString(),
+                description = description.text.toString()
+            )
         }
 
-        photo_from_gallery.setOnClickListener{
-            viewModel.loadPhotoFromGallery()
+        photo_from_gallery.setOnClickListener {
+            activity?.let {
+                viewModel.loadPhotoFromGallery(this, it.packageManager)
+            }
         }
 
-        take_photo.setOnClickListener{
+        take_photo.setOnClickListener {
             activity?.let {
                 viewModel.takePhoto(this, it.packageManager)
             }
@@ -55,6 +60,8 @@ class NewPersonFragment : Fragment(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        viewModel.onActivityResult(requestCode, resultCode, data)
+        activity?.let {
+            viewModel.onActivityResult(requestCode, resultCode, data, it.contentResolver)
+        }
     }
 }
