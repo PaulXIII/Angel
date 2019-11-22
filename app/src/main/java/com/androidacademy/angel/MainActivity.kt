@@ -9,7 +9,7 @@ import com.androidacademy.angel.data.AdvertModel
 import com.androidacademy.angel.network.Repository
 
 class MainActivity : AppCompatActivity() {
-    val globalViewModel: FragmentController = FragmentController()
+    val fragmentController: FragmentController = FragmentController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        globalViewModel.nextFragment.observe(this, Observer<Fragment> {
+        fragmentController.nextFragment.observe(this, Observer<Fragment> {
             if (it == null)
                 throw IllegalArgumentException("Fragment can't be null")
 
@@ -37,6 +37,6 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         })
 
-        globalViewModel.openLogin()
+        fragmentController.openLogin()
     }
 }
