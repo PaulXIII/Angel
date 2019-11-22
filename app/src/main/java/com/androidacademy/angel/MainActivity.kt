@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState == null)
+//            fragmentController.openLogin()
             fragmentController.openAdvertisementList()
     }
 
