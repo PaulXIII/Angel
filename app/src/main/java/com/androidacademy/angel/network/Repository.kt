@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.androidacademy.angel.data.AdvertModel
+import com.androidacademy.angel.prefs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -60,6 +61,7 @@ object Repository {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             completionListener(task.isSuccessful)
             if(task.isSuccessful){
+                prefs.idClient = task.result?.user?.uid
                 Log.d("WTF", "${task.result?.user?.uid}")
             }
         }

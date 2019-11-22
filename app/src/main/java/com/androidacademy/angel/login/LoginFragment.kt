@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
 import com.androidacademy.angel.network.Repository
+import com.androidacademy.angel.prefs
 import kotlinx.android.synthetic.main.login_fragment.view.*
 
 class LoginFragment: Fragment() {
@@ -27,6 +28,7 @@ class LoginFragment: Fragment() {
         view.log_in.setOnClickListener {
             Repository.signIn(view.email.text.toString(), view.password.text.toString()){
                 isSuccessful -> Log.d("WTF", "$isSuccessful")
+
             }
         }
 
