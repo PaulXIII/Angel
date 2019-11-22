@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
         fragmentController.nextFragment.observe(this, Observer<Fragment> {
             if (it == null)
                 throw IllegalArgumentException("Fragment can't be null")
