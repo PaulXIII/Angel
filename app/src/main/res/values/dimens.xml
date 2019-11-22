@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ad_list_item_height">96dp</dimen>
+    <dimen name="ad_list_item_padding">3dp</dimen>
+    <dimen name="list_item_content_size">90dp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+</resources>
