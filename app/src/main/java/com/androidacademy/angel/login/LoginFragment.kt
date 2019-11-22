@@ -41,7 +41,6 @@ class LoginFragment: Fragment() {
         })
 
         viewModel.logInEvent.observe(this, Observer {isSuccess ->
-            var string = ""
             if(isSuccess){
                 fragmentManager?.let {
                     val fragment = AdvertisementFragmentList()
