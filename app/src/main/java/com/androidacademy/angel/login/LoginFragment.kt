@@ -68,15 +68,6 @@ class LoginFragment: Fragment() {
 
         })
 
-
-//        view.log_in.setOnClickListener {
-//            Repository.signIn(view.email.text.toString(), view.password.text.toString()){
-//                isSuccessful -> Log.d("WTF", "$isSuccessful")
-//
-//            }
-//        }
-
-
         return binding.root
     }
 }

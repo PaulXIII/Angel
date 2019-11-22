@@ -15,4 +15,6 @@
     <string name="wrong_email">Некоректный адресс электронной почты</string>
     <string name="short_password">Пароль должен быть не меньше 8 символов</string>
     <string name="log_in_error">Ошибка входа</string>
+    <string name="confirm_password_error">Пароли не совпадают</string>
+    <string name="registration_error">Пользователь с такой электронной почтой уже существует</string>
 </resources>
