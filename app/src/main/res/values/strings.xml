@@ -12,4 +12,7 @@
     <string name="registration_in_sys">Регистрация в системе</string>
     <string name="confirm_password">Подтвердить пароль</string>
     <string name="log_up">Зарегистрироваться</string>
+    <string name="wrong_email">Некоректный адресс электронной почты</string>
+    <string name="short_password">Пароль должен быть не меньше 8 символов</string>
+    <string name="log_in_error">Ошибка входа</string>
 </resources>
