@@ -53,7 +53,7 @@ object Repository {
                         res.add(value)
                     }
                 }
-                advertsLiveData.postValue(res)
+                advertsLiveData.postValue(res.sortedByDescending { item -> item.id })
                 Log.d("TAG", "Count ${data.childrenCount}")
                 Log.d("TAG", "Count ${data.key}")
             }
