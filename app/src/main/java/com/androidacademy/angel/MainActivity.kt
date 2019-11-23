@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState == null)
-//            fragmentController.openLogin()
-            fragmentController.openAdvertisementList()
+            fragmentController.openLogin()
     }
 
     private fun showDefaultFragment(fragment: Fragment) {
@@ -72,14 +71,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showProgressScreen() {
+    fun showProgressScreen() {
         val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
         frameLayout.isVisible = true
         val progressBar = findViewById<ProgressBar>(R.id.requestNetwork)
         progressBar.isVisible = true
     }
 
-    private fun hideProgressScreen() {
+     fun hideProgressScreen() {
         val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
         frameLayout.isVisible = false
         val progressBar = findViewById<ProgressBar>(R.id.requestNetwork)
