@@ -35,8 +35,7 @@ class NewPersonFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NewPersonViewModel::class.java)
         viewModel.photoBitmap.observe(this, Observer { image -> loadImage(image) })
-        viewModel.error.observe(this, Observer { endWithError() })
-        viewModel.success.observe(this, Observer { successEnd() })
+        viewModel.status.observe(this, Observer { status -> updateStatus(status) })
 
         publish.setOnClickListener {
             (activity as MainActivity).showProgressScreen()
@@ -64,16 +63,17 @@ class NewPersonFragment : Fragment() {
         }
     }
 
-    fun endWithError(){
+    fun updateStatus(status: NewPersonViewModel.Status) {
         (activity as MainActivity).hideProgressScreen()
-        Toast.makeText(context, "ERROR", Toast.LENGTH_LONG).show()
-        fragmentManager?.popBackStack()
-    }
-
-    fun successEnd() {
-        (activity as MainActivity).hideProgressScreen()
-        Toast.makeText(context, "SUCCESS", Toast.LENGTH_LONG).show()
-        fragmentManager?.popBackStack()
+        val message = when (status) {
+            NewPersonViewModel.Status.DATA_ERROR -> "Данные введены не верно"
+            NewPersonViewModel.Status.ERROR -> "Ошибка создания объявления"
+            NewPersonViewModel.Status.SUCCESS -> "Объявление созданно успешно"
+        }
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        if (status != NewPersonViewModel.Status.DATA_ERROR) {
+            fragmentManager?.popBackStack()
+        }
     }
 
     fun loadImage(image: Bitmap?) {
