@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.androidacademy.angel.Const.INTENT_KEY
-import com.androidacademy.angel.Const.OPEN_FRAGMENT
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -55,7 +54,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
-            .setCustomAnimations(R.animator.slide_in_left,   R.animator.slide_in_right)
+            .setCustomAnimations(
+                R.animator.slide_in_left, R.animator.slide_out_left,
+                R.animator.slide_out_right, R.animator.slide_in_right
+            )
             .replace(
                 R.id.base_fragment_layout, fragment
             )
