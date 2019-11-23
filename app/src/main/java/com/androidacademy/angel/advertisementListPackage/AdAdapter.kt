@@ -14,7 +14,6 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class AdAdapter(
-    var ads: List<AdvertModel>,
     private val placeHolder: Int,
     private val listener: OnAdvertClick
 ) :
@@ -33,12 +32,8 @@ class AdAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return ads.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(ads[position], placeHolder)
+        holder.bind(currentList[position], placeHolder)
     }
 }
 

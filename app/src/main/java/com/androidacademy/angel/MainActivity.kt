@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun showBackButtons(visibility: Boolean) {
+    fun showBackButtons(visibility: Boolean) {
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(visibility)
             setDisplayShowHomeEnabled(visibility)
