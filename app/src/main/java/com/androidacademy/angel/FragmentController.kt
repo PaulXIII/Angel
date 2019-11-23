@@ -3,6 +3,7 @@ package com.androidacademy.angel
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.androidacademy.angel.adding.NewPersonFragment
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
 import com.androidacademy.angel.data.AdvertModel
 import com.androidacademy.angel.details.DetailsFragment
@@ -31,5 +32,9 @@ class FragmentController {
 
     internal fun openDetails(advertModel: AdvertModel){
         pushNextFragment(DetailsFragment.newInstance(advertModel))
+    }
+
+    internal fun openAdd(){
+        pushNextFragment(NewPersonFragment())
     }
 }
