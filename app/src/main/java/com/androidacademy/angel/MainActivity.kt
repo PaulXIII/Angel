@@ -1,6 +1,8 @@
 package com.androidacademy.angel
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.FrameLayout
 import android.widget.ProgressBar
@@ -8,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.androidacademy.angel.Const.INTENT_KEY
+import com.androidacademy.angel.Const.OPEN_FRAGMENT
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
 
 class MainActivity : AppCompatActivity() {
@@ -71,6 +75,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        Log.d("WTF", "OnNewIntent")
+        val extras = intent?.extras
+        if(extras?.containsKey(INTENT_KEY) == true){
+            Log.d("WTF", "${extras.getString(INTENT_KEY)}")
+            fragmentController.openAdvertisementList()
+        }
+
+        super.onNewIntent(intent)
+    }
+
+    private fun showProgressScreen() {
     fun showProgressScreen() {
         val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
         frameLayout.isVisible = true

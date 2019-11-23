@@ -3,6 +3,7 @@ package com.androidacademy.angel
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.google.firebase.messaging.FirebaseMessaging
 
 val prefs: Prefs by lazy {
     ApplicationClass.preferences!!
@@ -16,6 +17,7 @@ class ApplicationClass: Application() {
 
     override fun onCreate() {
         preferences = Prefs(applicationContext)
+        FirebaseMessaging.getInstance().subscribeToTopic("global")
         super.onCreate()
     }
 }
