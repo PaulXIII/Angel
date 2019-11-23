@@ -30,7 +30,7 @@ class NewPersonViewModel : ViewModel() {
         photoBitmap.value?.compress(Bitmap.CompressFormat.PNG, 15, stream)
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
-        val photoRef = storageRef.child("$title.png")
+        val photoRef = storageRef.child("${title}_${System.currentTimeMillis()}.png")
         val uploadTask = photoRef.putBytes(stream.toByteArray())
         uploadTask.addOnFailureListener {
             error.value = true
