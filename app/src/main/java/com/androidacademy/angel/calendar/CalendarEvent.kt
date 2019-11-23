@@ -7,15 +7,11 @@ import com.androidacademy.angel.data.AdvertModel
 import java.util.*
 
     fun createCalendarEvent(context: Context,advertModel: AdvertModel) {
-
-
-        val begindate:Date=advertModel.nextEvent?.startTime!!
-        val enddate:Date=advertModel.nextEvent?.endTime!!
         val beginTime = Calendar.getInstance()
-        beginTime.time=begindate
+        beginTime.timeInMillis = advertModel.nextEvent?.startTime!! * 1000
 
         val endTime = Calendar.getInstance()
-        endTime.time=enddate
+        endTime.timeInMillis= advertModel.nextEvent?.endTime!! * 1000
 
         val intent = Intent(Intent.ACTION_INSERT)
             .setData(CalendarContract.Events.CONTENT_URI)
