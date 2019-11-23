@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1056321779198-1jtj27dvqgv2nc244574r85migspgicu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.androidacademy.angel",
+            "certificate_hash": "52a24d73c14a3f6de4f2184788a3f96d486c13aa"
+          }
+        },
+        {
           "client_id": "1056321779198-hon8vv884hgekkt6glgtsd3l4rulhni7.apps.googleusercontent.com",
           "client_type": 3
         }
