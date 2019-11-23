@@ -3,6 +3,7 @@ package com.androidacademy.angel.adding
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,10 +40,14 @@ class NewPersonFragment : Fragment() {
 
         publish.setOnClickListener {
             (activity as MainActivity).showProgressScreen()
-            Thread.sleep(500)
-            viewModel.publish(
-                title = title.text.toString(),
-                description = description.text.toString()
+
+            val handler = Handler()
+            handler.postDelayed({
+                    viewModel.publish(
+                        title = title.text.toString(),
+                        description = description.text.toString()
+                    )
+                }, 500
             )
         }
 
@@ -58,7 +63,7 @@ class NewPersonFragment : Fragment() {
             }
         }
 
-        clear.setOnClickListener{
+        clear.setOnClickListener {
             viewModel.photoBitmap.value = null
         }
     }
