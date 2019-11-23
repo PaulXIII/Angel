@@ -1,8 +1,6 @@
 package com.androidacademy.angel.advertisementListPackage
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
 import com.androidacademy.angel.data.AdvertModel
-import com.androidacademy.angel.details.DetailsFragment
+import kotlinx.android.synthetic.main.advertisement_list_fragment.*
 
 
 class AdvertisementFragmentList : Fragment(), OnAdvertClick {
@@ -50,5 +48,12 @@ class AdvertisementFragmentList : Fragment(), OnAdvertClick {
                 R.drawable.angel_logo,
                 this
             )
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        add_new_person.setOnClickListener{
+            (activity as MainActivity).fragmentController.openAddNewPerson()
+        }
     }
 }
