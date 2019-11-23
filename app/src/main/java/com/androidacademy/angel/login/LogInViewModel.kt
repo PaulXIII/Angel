@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.androidacademy.angel.network.Repository
 
-class LogInViewModel: ViewModel(){
+class LogInViewModel : ViewModel() {
     val email: MutableLiveData<String> = MutableLiveData()
     val password: MutableLiveData<String> = MutableLiveData()
 
@@ -13,47 +13,47 @@ class LogInViewModel: ViewModel(){
     private val _passwordIsValid: MutableLiveData<Boolean> = MutableLiveData()
 
     val emailIsValid: LiveData<Boolean>
-    get() = _emailIsValid
+        get() = _emailIsValid
 
     val passwordIsValid: LiveData<Boolean>
-    get() = _passwordIsValid
+        get() = _passwordIsValid
 
-    fun checkEmail(){
+    fun checkEmail() {
         _emailIsValid.value = email.value?.contains("@") ?: false
     }
 
-    fun checkPassword(){
+    fun checkPassword() {
         _passwordIsValid.value = password.value?.length ?: 0 >= 8
     }
 
-    fun logIn(){
+    fun logIn() {
         checkEmail()
         checkPassword()
-        if(_emailIsValid.value == true && _passwordIsValid.value == true){
-            Repository.signIn(email.value ?: "", password.value ?: ""){
-                isSuccessful ->  completionListener(isSuccessful)
+        if (_emailIsValid.value == true && _passwordIsValid.value == true) {
+            Repository.signIn(email.value ?: "", password.value ?: "") { isSuccessful ->
+                completionListener(isSuccessful)
             }
         }
     }
 
     private val _registrationEvent: MutableLiveData<Boolean> = MutableLiveData()
     val registationEvent: LiveData<Boolean>
-    get() = _registrationEvent
+        get() = _registrationEvent
 
-    fun moveToRegistration(){
+    fun moveToRegistration() {
         _registrationEvent.value = true
     }
 
-    fun resetEvent(){
+    fun resetEvent() {
         _registrationEvent.value = false
     }
 
 
     private val _logInEvent: MutableLiveData<Boolean> = MutableLiveData()
     val logInEvent: LiveData<Boolean>
-    get() = _logInEvent
+        get() = _logInEvent
 
-    private fun completionListener(result: Boolean){
+    private fun completionListener(result: Boolean) {
         _logInEvent.value = result
     }
 

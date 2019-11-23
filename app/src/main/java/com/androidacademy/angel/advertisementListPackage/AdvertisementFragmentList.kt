@@ -10,13 +10,20 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
+import com.androidacademy.angel.data.AdvertModel
+import com.androidacademy.angel.details.DetailsFragment
 
 
-class AdvertisementFragmentList : Fragment() {
+class AdvertisementFragmentList : Fragment(), OnAdvertClick {
+    override fun onClick(ad: AdvertModel) {
+        fragmentManager?.let {
+            (activity as MainActivity).fragmentController.openDetails(ad)
+        }
+    }
 
     private lateinit var parentActivity: AppCompatActivity
-    private lateinit var placeHolder: Bitmap
     private lateinit var adListAdapter: AdAdapter
 
     override fun onCreateView(
@@ -40,7 +47,8 @@ class AdvertisementFragmentList : Fragment() {
         adListAdapter =
             AdAdapter(
                 listOf(),
-                R.drawable.angel_logo
+                R.drawable.angel_logo,
+                this
             )
     }
 }
