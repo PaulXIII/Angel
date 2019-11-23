@@ -18,13 +18,14 @@ import java.io.ByteArrayOutputStream
 
 class NewPersonViewModel : ViewModel() {
     var photoBitmap: MutableLiveData<Bitmap> = MutableLiveData()
-    var success: MutableLiveData<Boolean> = MutableLiveData()
-    var error: MutableLiveData<Boolean> = MutableLiveData()
     val repository = Repository
+    var status: MutableLiveData<Status> = MutableLiveData()
 
     fun publish(title: String, description: String) {
-        if (title != "" || description != "" || photoBitmap.value != null)
+        if (title == "" || description == "" || photoBitmap.value == null) {
+            status.value = Status.DATA_ERROR
             return
+        }
 
         val stream = ByteArrayOutputStream()
         photoBitmap.value?.compress(Bitmap.CompressFormat.PNG, 15, stream)
@@ -33,14 +34,14 @@ class NewPersonViewModel : ViewModel() {
         val photoRef = storageRef.child("${title}_${System.currentTimeMillis()}.png")
         val uploadTask = photoRef.putBytes(stream.toByteArray())
         uploadTask.addOnFailureListener {
-            error.value = true
+            status.value = Status.ERROR
         }.addOnSuccessListener {
             val getRef = storageRef.child("$title.png")
             getRef.downloadUrl.addOnSuccessListener {
                 if (it != null) repository.updateAdvert(title, description, it.toString())
-                success.value = true
+                status.value = Status.SUCCESS
             }.addOnFailureListener{
-                error.value = true
+                status.value = Status.ERROR
             }
         }
     }
@@ -90,5 +91,11 @@ class NewPersonViewModel : ViewModel() {
     companion object {
         private val REQUEST_IMAGE_CAPTURE_CAMERA = 1
         private val REQUEST_IMAGE_CAPTURE_GALERIA = 2
+    }
+
+    enum class Status {
+        DATA_ERROR,
+        SUCCESS,
+        ERROR
     }
 }
