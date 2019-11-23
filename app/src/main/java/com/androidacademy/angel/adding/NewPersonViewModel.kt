@@ -7,15 +7,18 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidacademy.angel.network.Repository
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 class NewPersonViewModel : ViewModel() {
     var photoBitmap: MutableLiveData<Bitmap> = MutableLiveData()
+    val repository = Repository
 
     fun publish(title: String, description: String) {
        val stream = ByteArrayOutputStream()
@@ -29,8 +32,8 @@ class NewPersonViewModel : ViewModel() {
         }.addOnSuccessListener {
         val getRef = storageRef.child("$title.png")
             getRef.downloadUrl.addOnSuccessListener {
-
-                Log.d("aaaaaaaaaaa", it!!.toString())
+               // Log.d("aaaaaaaaaaa", it!!.toString())
+                if (it !=null) repository.updateAdvert(title, description, it.toString())
             }
         }
     }
