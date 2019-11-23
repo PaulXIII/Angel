@@ -1,6 +1,5 @@
 package com.androidacademy.angel.advertisementListPackage
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int) :
+class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int, private val listener: OnAdvertClick) :
     ListAdapter<AdvertModel, ViewHolder>(
         AdListDiffUtil()
     ) {
@@ -25,7 +24,8 @@ class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int) :
                 R.layout.advertisement_list_item,
                 parent,
                 false
-            )
+            ),
+            listener
         )
     }
 
@@ -38,7 +38,7 @@ class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int) :
     }
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ViewHolder(itemView: View, private val listener: OnAdvertClick) : RecyclerView.ViewHolder(itemView) {
     private val title: TextView = itemView.findViewById(R.id.ad_list_item_title)
     private val photo: ImageView = itemView.findViewById(R.id.ad_list_item_photo)
 
@@ -49,5 +49,12 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .applyDefaultRequestOptions(RequestOptions.placeholderOf(placeHolder))
             .load(ad.url)
             .into(photo)
+        photo.setOnClickListener{
+            listener.onClick(ad)
+        }
     }
+}
+
+interface OnAdvertClick{
+    fun onClick(ad: AdvertModel)
 }
