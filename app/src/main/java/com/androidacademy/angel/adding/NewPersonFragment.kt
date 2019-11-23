@@ -52,10 +52,20 @@ class NewPersonFragment : Fragment() {
                 viewModel.takePhoto(this, it.packageManager)
             }
         }
+
+        clear.setOnClickListener{
+            viewModel.photoBitmap.value = null
+        }
     }
 
     fun loadImage(image: Bitmap?) {
-        Glide.with(this).load(image).placeholder(R.drawable.angel_logo).into(photo)
+        clear.visibility = if (image == null) View.GONE else View.VISIBLE
+
+        if (image == null) {
+            Glide.with(this).load(R.drawable.angel_logo).into(photo)
+        }else {
+            Glide.with(this).load(image).placeholder(R.drawable.angel_logo).into(photo)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
