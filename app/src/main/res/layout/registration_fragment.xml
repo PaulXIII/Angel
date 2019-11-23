@@ -101,12 +101,14 @@
 
                 <Button
                     android:id="@+id/registration"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@color/white"
                     android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
                     android:text="@string/log_up"
                     android:onClick="@{() -> viewModel.register()}"
                     app:layout_constraintBottom_toBottomOf="parent"
