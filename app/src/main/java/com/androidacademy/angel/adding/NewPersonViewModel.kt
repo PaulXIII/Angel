@@ -23,6 +23,9 @@ class NewPersonViewModel : ViewModel() {
     val repository = Repository
 
     fun publish(title: String, description: String) {
+        if (title != "" || description != "" || photoBitmap.value != null)
+            return
+
         val stream = ByteArrayOutputStream()
         photoBitmap.value?.compress(Bitmap.CompressFormat.PNG, 15, stream)
         val storage = FirebaseStorage.getInstance()
