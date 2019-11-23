@@ -56,7 +56,7 @@ class DetailsFragment : Fragment() {
 
         add_to_calendar.setOnClickListener{
             advertModel?.let {
-                viewModel.addToCalendar(it)
+                viewModel.addToCalendar(context, it)
             }
         }
 
