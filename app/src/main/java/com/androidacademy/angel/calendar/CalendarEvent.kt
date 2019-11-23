@@ -19,9 +19,16 @@ import java.util.*
             .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
             .putExtra(CalendarContract.Events.TITLE, advertModel.title)
             .putExtra(CalendarContract.Events.DESCRIPTION, advertModel.description)
+            .putExtra(CalendarContract.Events.EVENT_LOCATION, "${advertModel.nextEvent?.latitude?.div(
+                1000_000f
+            )}, ${advertModel.nextEvent?.longitude?.div(
+                1000_000f
+            )}")
             .putExtra(
                 CalendarContract.Events.AVAILABILITY,
                 CalendarContract.Events.AVAILABILITY_BUSY
             )
+
+
         context.startActivity(intent)
     }
