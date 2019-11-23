@@ -13,20 +13,25 @@ import com.androidacademy.angel.MainActivity
 import android.app.PendingIntent
 import com.androidacademy.angel.Const.INTENT_KEY
 import com.androidacademy.angel.Const.OPEN_FRAGMENT
+import com.google.firebase.messaging.FirebaseMessaging
+
+
+
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     val CHANNEL_ID = "CHANNEL_ID"
 
-
     override fun onMessageReceived(message: RemoteMessage) {
-        sendNotification(message.notification?.body ?: "")
+        sendNotification(message.data.get("title") ?: "", message.data.get("msg")?:"")
+
+
         super.onMessageReceived(message)
 
     }
 
-    private fun sendNotification(msg: String){
+    private fun sendNotification(msg: String, title: String){
 
         val showActivityIntent = Intent(application, MainActivity::class.java)
         showActivityIntent.putExtra(INTENT_KEY, OPEN_FRAGMENT)
@@ -55,6 +60,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.angel_logo)
             .setContentText(msg)
             .setAutoCancel(true)
+            .setContentTitle(title)
             .setContentIntent(pendingIntent)
         notificationManager.notify(1, notification.build())
 
