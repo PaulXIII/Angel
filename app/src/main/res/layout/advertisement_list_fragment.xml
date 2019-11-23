@@ -15,6 +15,7 @@
         tools:listitem="@layout/advertisement_list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:layout_behavior="com.androidacademy.angel.ScrollFABBehavior"
         android:id="@+id/add_new_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
