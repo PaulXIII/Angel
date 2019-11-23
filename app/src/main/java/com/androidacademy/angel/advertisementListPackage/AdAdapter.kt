@@ -51,8 +51,12 @@ class ViewHolder(itemView: View, private val listener: OnAdvertClick) :
         title.text = ad.title
         Glide
             .with(itemView)
-            .applyDefaultRequestOptions(RequestOptions.placeholderOf(placeHolder))
+            .applyDefaultRequestOptions(
+                RequestOptions.circleCropTransform()
+                    .placeholder(placeHolder)
+            )
             .load(ad.url)
+            .transform()
             .into(photo)
 
         itemView.setOnClickListener {
