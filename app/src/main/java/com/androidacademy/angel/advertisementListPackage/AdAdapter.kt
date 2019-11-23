@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.androidacademy.angel.R
 import com.androidacademy.angel.data.AdvertModel
 import com.bumptech.glide.Glide
@@ -43,12 +44,17 @@ class ViewHolder(itemView: View, private val listener: OnAdvertClick) :
     private val photo: ImageView = itemView.findViewById(R.id.ad_list_item_photo)
 
     fun bind(ad: AdvertModel, placeHolder: Int) {
+        val circularProgressDrawable = CircularProgressDrawable(photo.context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
         title.text = ad.title
         Glide
             .with(itemView)
             .applyDefaultRequestOptions(
                 RequestOptions.circleCropTransform()
-                    .placeholder(placeHolder)
+                    .placeholder(circularProgressDrawable)
             )
             .load(ad.url)
             .transform()
