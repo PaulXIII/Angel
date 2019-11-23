@@ -3,6 +3,7 @@ package com.androidacademy.angel.adding
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,9 +41,13 @@ class NewPersonFragment : Fragment() {
         publish.setOnClickListener {
             (activity as MainActivity).showProgressScreen()
 
-            viewModel.publish(
-                title = title.text.toString(),
-                description = description.text.toString()
+            val handler = Handler()
+            handler.postDelayed({
+                    viewModel.publish(
+                        title = title.text.toString(),
+                        description = description.text.toString()
+                    )
+                }, 500
             )
         }
 
@@ -58,7 +63,7 @@ class NewPersonFragment : Fragment() {
             }
         }
 
-        clear.setOnClickListener{
+        clear.setOnClickListener {
             viewModel.photoBitmap.value = null
         }
     }
@@ -78,7 +83,7 @@ class NewPersonFragment : Fragment() {
 
     fun loadImage(image: Bitmap?) {
         clear.visibility = if (image == null) View.GONE else View.VISIBLE
-        Glide.with(this).load(image).placeholder(R.drawable.angel_logo).into(photo)
+        Glide.with(this).load(image).placeholder(R.drawable.default_img).into(photo)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

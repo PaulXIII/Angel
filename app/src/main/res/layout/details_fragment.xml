@@ -56,8 +56,9 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:backgroundTint="@color/colorPrimaryDark"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#001F547E"
         app:rippleColor="#FF000000"
-        android:tint="@color/white"
         app:srcCompat="@drawable/baseline_calendar_today_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

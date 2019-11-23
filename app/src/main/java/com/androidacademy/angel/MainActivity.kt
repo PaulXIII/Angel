@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.androidacademy.angel.Const.INTENT_KEY
 import com.androidacademy.angel.Const.OPEN_FRAGMENT
 import com.androidacademy.angel.advertisementListPackage.AdvertisementFragmentList
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     val fragmentController: FragmentController = FragmentController()
@@ -90,10 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showProgressScreen() {
-        val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
-        frameLayout.isVisible = true
-        val progressBar = findViewById<ProgressBar>(R.id.requestNetwork)
-        progressBar.isVisible = true
+        requestNetworkContainer.isVisible = true
+        requestNetwork.isVisible = true
     }
 
     fun hideProgressScreen() {

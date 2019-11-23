@@ -18,4 +18,10 @@
     <string name="confirm_password_error">Пароли не совпадают</string>
     <string name="registration_error">Пользователь с такой электронной почтой уже существует</string>
     <string name="photo">Photo</string>
+    <string name="take_photo">Сделать фото</string>
+    <string name="gallery">Галерея</string>
+    <string name="publicate">Опубликовать</string>
+    <string name="description">Описание</string>
+    <string name="clrear">Очистить</string>
+    <string name="Title">Заголовок</string>
 </resources>
