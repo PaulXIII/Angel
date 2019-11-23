@@ -32,9 +32,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState == null)
-//            fragmentController.openLogin()
-            fragmentController.openAdvertisementList()
-//        fragmentController.openAdd()
+            fragmentController.openLogin()
     }
 
     private fun showDefaultFragment(fragment: Fragment) {

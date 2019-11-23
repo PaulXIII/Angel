@@ -18,22 +18,26 @@ import java.io.ByteArrayOutputStream
 
 class NewPersonViewModel : ViewModel() {
     var photoBitmap: MutableLiveData<Bitmap> = MutableLiveData()
+    var success: MutableLiveData<Boolean> = MutableLiveData()
+    var error: MutableLiveData<Boolean> = MutableLiveData()
     val repository = Repository
 
     fun publish(title: String, description: String) {
-       val stream = ByteArrayOutputStream()
+        val stream = ByteArrayOutputStream()
         photoBitmap.value?.compress(Bitmap.CompressFormat.PNG, 15, stream)
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
         val photoRef = storageRef.child("$title.png")
         val uploadTask = photoRef.putBytes(stream.toByteArray())
-        uploadTask.addOnFailureListener{
-
+        uploadTask.addOnFailureListener {
+            error.value = true
         }.addOnSuccessListener {
-        val getRef = storageRef.child("$title.png")
+            val getRef = storageRef.child("$title.png")
             getRef.downloadUrl.addOnSuccessListener {
-               // Log.d("aaaaaaaaaaa", it!!.toString())
-                if (it !=null) repository.updateAdvert(title, description, it.toString())
+                if (it != null) repository.updateAdvert(title, description, it.toString())
+                success.value = true
+            }.addOnFailureListener{
+                error.value = true
             }
         }
     }
@@ -55,7 +59,7 @@ class NewPersonViewModel : ViewModel() {
     ) {
         val photoTakerIntent: Intent = Intent(Intent.ACTION_PICK)
         photoTakerIntent.setType("image/*")
-        fragment.startActivityForResult(photoTakerIntent, REQUEST_IMAGE_CAPTURE_GALERIA )
+        fragment.startActivityForResult(photoTakerIntent, REQUEST_IMAGE_CAPTURE_GALERIA)
 
 
     }
@@ -69,11 +73,10 @@ class NewPersonViewModel : ViewModel() {
         if (requestCode == REQUEST_IMAGE_CAPTURE_CAMERA && resultCode == AppCompatActivity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             photoBitmap.value = imageBitmap
-        }
-        else if (requestCode == REQUEST_IMAGE_CAPTURE_GALERIA && resultCode == AppCompatActivity.RESULT_OK) {
-          val imageUri = data?.data
-            if(imageUri != null) {
-                val inputSrtream =  contentResolver.openInputStream(imageUri)
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE_GALERIA && resultCode == AppCompatActivity.RESULT_OK) {
+            val imageUri = data?.data
+            if (imageUri != null) {
+                val inputSrtream = contentResolver.openInputStream(imageUri)
                 val bitmap = BitmapFactory.decodeStream(inputSrtream)
                 photoBitmap.value = bitmap
             }

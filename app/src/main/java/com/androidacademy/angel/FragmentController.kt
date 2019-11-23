@@ -34,7 +34,7 @@ class FragmentController {
         pushNextFragment(DetailsFragment.newInstance(advertModel))
     }
 
-    internal fun openAdd(){
+    internal fun openAddNewPerson(){
         pushNextFragment(NewPersonFragment())
     }
 }

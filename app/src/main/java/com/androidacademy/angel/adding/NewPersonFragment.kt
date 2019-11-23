@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.androidacademy.angel.MainActivity
 import com.androidacademy.angel.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.add_new_fragment.*
@@ -33,8 +35,12 @@ class NewPersonFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(NewPersonViewModel::class.java)
         viewModel.photoBitmap.observe(this, Observer { image -> loadImage(image) })
+        viewModel.error.observe(this, Observer { endWithError() })
+        viewModel.success.observe(this, Observer { successEnd() })
 
         publish.setOnClickListener {
+            (activity as MainActivity).showProgressScreen()
+
             viewModel.publish(
                 title = title.text.toString(),
                 description = description.text.toString()
@@ -56,6 +62,18 @@ class NewPersonFragment : Fragment() {
         clear.setOnClickListener{
             viewModel.photoBitmap.value = null
         }
+    }
+
+    fun endWithError(){
+        (activity as MainActivity).hideProgressScreen()
+        Toast.makeText(context, "ERROR", Toast.LENGTH_LONG).show()
+        fragmentManager?.popBackStack()
+    }
+
+    fun successEnd() {
+        (activity as MainActivity).hideProgressScreen()
+        Toast.makeText(context, "SUCCESS", Toast.LENGTH_LONG).show()
+        fragmentManager?.popBackStack()
     }
 
     fun loadImage(image: Bitmap?) {
