@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         Log.d("WTF", "OnNewIntent")
         val extras = intent?.extras
-        if(extras?.containsKey(INTENT_KEY) == true){
+        if (extras?.containsKey(INTENT_KEY) == true) {
             Log.d("WTF", "${extras.getString(INTENT_KEY)}")
             fragmentController.openAdvertisementList()
         }
@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
     }
 
-    private fun showProgressScreen() {
     fun showProgressScreen() {
         val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
         frameLayout.isVisible = true
@@ -94,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.isVisible = true
     }
 
-     fun hideProgressScreen() {
+    fun hideProgressScreen() {
         val frameLayout = findViewById<FrameLayout>(R.id.requestNetworkContainer)
         frameLayout.isVisible = false
         val progressBar = findViewById<ProgressBar>(R.id.requestNetwork)
