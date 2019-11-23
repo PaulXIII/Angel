@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (savedInstanceState == null)
-            fragmentController.openLogin()
+            fragmentController.openAdvertisementList()
     }
 
     private fun showDefaultFragment(fragment: Fragment) {
