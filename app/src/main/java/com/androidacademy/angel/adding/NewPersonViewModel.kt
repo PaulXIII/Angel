@@ -27,16 +27,17 @@ class NewPersonViewModel : ViewModel() {
             return
         }
 
+        val filename = "${title}_${System.currentTimeMillis()}.png"
         val stream = ByteArrayOutputStream()
         photoBitmap.value?.compress(Bitmap.CompressFormat.PNG, 15, stream)
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.reference
-        val photoRef = storageRef.child("${title}_${System.currentTimeMillis()}.png")
+        val photoRef = storageRef.child(filename)
         val uploadTask = photoRef.putBytes(stream.toByteArray())
         uploadTask.addOnFailureListener {
             status.value = Status.ERROR
         }.addOnSuccessListener {
-            val getRef = storageRef.child("$title.png")
+            val getRef = storageRef.child(filename)
             getRef.downloadUrl.addOnSuccessListener {
                 if (it != null) repository.updateAdvert(title, description, it.toString())
                 status.value = Status.SUCCESS

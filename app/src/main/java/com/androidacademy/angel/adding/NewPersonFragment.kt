@@ -39,7 +39,7 @@ class NewPersonFragment : Fragment() {
 
         publish.setOnClickListener {
             (activity as MainActivity).showProgressScreen()
-
+            Thread.sleep(500)
             viewModel.publish(
                 title = title.text.toString(),
                 description = description.text.toString()
@@ -78,7 +78,7 @@ class NewPersonFragment : Fragment() {
 
     fun loadImage(image: Bitmap?) {
         clear.visibility = if (image == null) View.GONE else View.VISIBLE
-        Glide.with(this).load(image).placeholder(R.drawable.angel_logo).into(photo)
+        Glide.with(this).load(image).placeholder(R.drawable.default_img).into(photo)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
