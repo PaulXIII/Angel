@@ -6,8 +6,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.provider.MediaStore
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -40,7 +38,7 @@ class NewPersonViewModel : ViewModel() {
             getRef.downloadUrl.addOnSuccessListener {
                 if (it != null) repository.updateAdvert(title, description, it.toString())
                 status.value = Status.SUCCESS
-            }.addOnFailureListener{
+            }.addOnFailureListener {
                 status.value = Status.ERROR
             }
         }
@@ -63,9 +61,7 @@ class NewPersonViewModel : ViewModel() {
     ) {
         val photoTakerIntent: Intent = Intent(Intent.ACTION_PICK)
         photoTakerIntent.setType("image/*")
-        fragment.startActivityForResult(photoTakerIntent, REQUEST_IMAGE_CAPTURE_GALERIA)
-
-
+        fragment.startActivityForResult(photoTakerIntent, REQUEST_IMAGE_CAPTURE_GALLERIA)
     }
 
     fun onActivityResult(
@@ -77,20 +73,19 @@ class NewPersonViewModel : ViewModel() {
         if (requestCode == REQUEST_IMAGE_CAPTURE_CAMERA && resultCode == AppCompatActivity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             photoBitmap.value = imageBitmap
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE_GALERIA && resultCode == AppCompatActivity.RESULT_OK) {
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE_GALLERIA && resultCode == AppCompatActivity.RESULT_OK) {
             val imageUri = data?.data
             if (imageUri != null) {
-                val inputSrtream = contentResolver.openInputStream(imageUri)
-                val bitmap = BitmapFactory.decodeStream(inputSrtream)
+                val inputStream = contentResolver.openInputStream(imageUri)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
                 photoBitmap.value = bitmap
             }
-
         }
     }
 
     companion object {
-        private val REQUEST_IMAGE_CAPTURE_CAMERA = 1
-        private val REQUEST_IMAGE_CAPTURE_GALERIA = 2
+        private const val REQUEST_IMAGE_CAPTURE_CAMERA = 1
+        private const val REQUEST_IMAGE_CAPTURE_GALLERIA = 2
     }
 
     enum class Status {
