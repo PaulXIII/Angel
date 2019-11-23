@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         fragmentController.nextFragment.observe(this, Observer<Fragment> {
             if (it == null)
                 throw IllegalArgumentException("Fragment can't be null")
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(null)
+            .setCustomAnimations(R.animator.slide_in_left,   R.animator.slide_in_right)
             .replace(
                 R.id.base_fragment_layout, fragment
             )
