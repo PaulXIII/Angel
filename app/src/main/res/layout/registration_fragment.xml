@@ -12,6 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background_reg"
         tools:context=".registration.RegistrationFragment">
 
         <ScrollView
@@ -22,16 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/registration_in_sys"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailLayout"
@@ -41,17 +32,19 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     app:errorEnabled="true"
+                    android:textColorHint="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/title">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
-                        android:text="@={viewModel.email}"
-                        app:emailFocusChanged="@{viewModel}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/email" />
+                        android:hint="@string/email"
+                        android:textColor="@color/white"
+                        android:text="@={viewModel.email}"
+                        app:emailFocusChanged="@{viewModel}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -62,6 +55,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     app:errorEnabled="true"
+                    app:endIconTint="@color/white"
+                    android:textColorHint="@color/white"
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="@={viewModel.password}"
                         app:passwordFocusChanged="@{viewModel}"
+                        android:textColor="@color/white"
                         android:inputType="textPassword"
                         android:hint="@string/password" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +81,8 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     app:errorEnabled="true"
+                    app:endIconTint="@color/white"
+                    android:textColorHint="@color/white"
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:textColor="@color/white"
                         app:confirmPasswordFocusChanged="@{viewModel}"
                         android:text="@={viewModel.confirmPassword}"
                         android:hint="@string/confirm_password" />
@@ -105,6 +104,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:background="@color/white"
                     android:layout_marginBottom="16dp"
                     android:text="@string/log_up"
                     android:onClick="@{() -> viewModel.register()}"
