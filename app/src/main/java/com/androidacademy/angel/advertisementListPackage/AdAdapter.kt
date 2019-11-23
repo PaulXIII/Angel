@@ -13,7 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 
-class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int, private val listener: OnAdvertClick) :
+class AdAdapter(
+    var ads: List<AdvertModel>,
+    private val placeHolder: Int,
+    private val listener: OnAdvertClick
+) :
     ListAdapter<AdvertModel, ViewHolder>(
         AdListDiffUtil()
     ) {
@@ -38,7 +42,8 @@ class AdAdapter(var ads: List<AdvertModel>, private val placeHolder: Int, privat
     }
 }
 
-class ViewHolder(itemView: View, private val listener: OnAdvertClick) : RecyclerView.ViewHolder(itemView) {
+class ViewHolder(itemView: View, private val listener: OnAdvertClick) :
+    RecyclerView.ViewHolder(itemView) {
     private val title: TextView = itemView.findViewById(R.id.ad_list_item_title)
     private val photo: ImageView = itemView.findViewById(R.id.ad_list_item_photo)
 
@@ -49,12 +54,13 @@ class ViewHolder(itemView: View, private val listener: OnAdvertClick) : Recycler
             .applyDefaultRequestOptions(RequestOptions.placeholderOf(placeHolder))
             .load(ad.url)
             .into(photo)
-        photo.setOnClickListener{
+
+        itemView.setOnClickListener {
             listener.onClick(ad)
         }
     }
 }
 
-interface OnAdvertClick{
+interface OnAdvertClick {
     fun onClick(ad: AdvertModel)
 }
