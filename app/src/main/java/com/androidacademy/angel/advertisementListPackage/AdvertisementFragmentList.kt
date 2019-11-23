@@ -48,11 +48,10 @@ class AdvertisementFragmentList : Fragment(), OnAdvertClick {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.search_menu, menu)
-        val data = Repository.adverts().observe(viewLifecycleOwner,
+        Repository.adverts().observe(viewLifecycleOwner,
             Observer<List<AdvertModel>> { data ->
-
-
                 val search: SearchView = menu.findItem(R.id.itemSearch).actionView as SearchView
+                search.setMaxWidth(Integer.MAX_VALUE);
                 search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
                         return false
