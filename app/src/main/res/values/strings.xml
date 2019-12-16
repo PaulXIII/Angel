@@ -24,4 +24,8 @@
     <string name="description">Описание</string>
     <string name="clrear">Очистить</string>
     <string name="Title">Заголовок</string>
+    <string name="fragmenr_cant_be_null">Fragment can\'t be null</string>
+    <string name="new_person_data_error">Данные введены не верно</string>
+    <string name="new_person_error">Ошибка создания объявления</string>
+    <string name="new_person_success">Объявление созданно успешно</string>
 </resources>

@@ -17,7 +17,6 @@ import com.bumptech.glide.request.RequestOptions
 
 
 class AdAdapter(
-    private val placeHolder: Int,
     private val listener: OnAdvertClick
 ) :
     ListAdapter<AdvertModel, ViewHolder>(
@@ -36,7 +35,7 @@ class AdAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(currentList[position], placeHolder)
+        holder.bind(currentList[position])
     }
 }
 
@@ -46,7 +45,7 @@ class ViewHolder(itemView: View, private val listener: OnAdvertClick) :
     private val name: TextView = itemView.findViewById(R.id.ad_list_item_name)
     private val photo: ImageView = itemView.findViewById(R.id.ad_list_item_photo)
 
-    fun bind(ad: AdvertModel, placeHolder: Int) {
+    fun bind(ad: AdvertModel) {
         val circularProgressDrawable = CircularProgressDrawable(photo.context)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f

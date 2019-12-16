@@ -27,14 +27,15 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:RegistrationFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
+        val binding: RegistrationFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.registration_fragment, container, false)
 
         val viewModel = ViewModelProviders.of(this).get(RegistrationViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         viewModel.emailIsValid.observe(this, Observer { isValid ->
-            if(isValid){
+            if (isValid) {
                 binding.emailLayout.isErrorEnabled = false
             } else {
                 binding.emailLayout.error = getString(R.string.wrong_email)
@@ -43,7 +44,7 @@ class RegistrationFragment : Fragment() {
         })
 
         viewModel.passwordIsValid.observe(this, Observer { isValid ->
-            if(isValid){
+            if (isValid) {
                 binding.passwordLayout.isErrorEnabled = false
             } else {
                 binding.passwordLayout.error = getString(R.string.short_password)
@@ -51,19 +52,19 @@ class RegistrationFragment : Fragment() {
 
         })
 
-        viewModel.confirmPasswordValid.observe(this, Observer {isValid ->
-            if(isValid){
+        viewModel.confirmPasswordValid.observe(this, Observer { isValid ->
+            if (isValid) {
                 binding.confirmPasswordlLayout.isErrorEnabled = false
-            }else{
-                 binding.confirmPasswordlLayout.error = getString(R.string.confirm_password_error)
+            } else {
+                binding.confirmPasswordlLayout.error = getString(R.string.confirm_password_error)
             }
 
         })
 
-        viewModel.registrationEvent.observe(this, Observer {isSuccess ->
-            if(isSuccess){
+        viewModel.registrationEvent.observe(this, Observer { isSuccess ->
+            if (isSuccess) {
                 (this.activity as MainActivity).fragmentController.openAdvertisementList()
-            }else{
+            } else {
                 var string = getString(R.string.registration_error)
                 Toast.makeText(activity, string, Toast.LENGTH_LONG).show()
             }

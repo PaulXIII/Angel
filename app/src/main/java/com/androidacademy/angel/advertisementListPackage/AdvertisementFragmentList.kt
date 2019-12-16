@@ -105,10 +105,7 @@ class AdvertisementFragmentList : Fragment(), OnAdvertClick {
         super.onAttach(context)
         parentActivity = context as AppCompatActivity
         adListAdapter =
-            AdAdapter(
-                R.drawable.angel_logo,
-                this
-            )
+            AdAdapter(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

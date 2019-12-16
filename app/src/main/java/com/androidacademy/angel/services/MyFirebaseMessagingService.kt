@@ -1,37 +1,32 @@
 package com.androidacademy.angel.services
 
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
-import com.google.firebase.messaging.FirebaseMessagingService
-import com.google.firebase.messaging.RemoteMessage
-import android.app.NotificationManager
-import android.app.NotificationChannel
-import android.content.Context
-import com.androidacademy.angel.R
-import com.androidacademy.angel.MainActivity
-import android.app.PendingIntent
 import com.androidacademy.angel.Const.INTENT_KEY
 import com.androidacademy.angel.Const.OPEN_FRAGMENT
-import com.google.firebase.messaging.FirebaseMessaging
+import com.androidacademy.angel.MainActivity
+import com.androidacademy.angel.R
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
-
-
-
+private const val CHANNEL_ID = "CHANNEL_ID"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    val CHANNEL_ID = "CHANNEL_ID"
-
     override fun onMessageReceived(message: RemoteMessage) {
-        sendNotification(message.data.get("title") ?: "", message.data.get("msg")?:"")
+        sendNotification(message.data.get("title") ?: "", message.data.get("msg") ?: "")
 
 
         super.onMessageReceived(message)
 
     }
 
-    private fun sendNotification(msg: String, title: String){
+    private fun sendNotification(msg: String, title: String) {
 
         val showActivityIntent = Intent(application, MainActivity::class.java)
         showActivityIntent.putExtra(INTENT_KEY, OPEN_FRAGMENT)
@@ -49,10 +44,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                CHANNEL_ID, "My channel",
+                CHANNEL_ID, "My channel", // TODO
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            channel.description = "My channel description"
+            channel.description = "My channel description" // TODO
             notificationManager.createNotificationChannel(channel)
         }
 

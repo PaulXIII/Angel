@@ -17,11 +17,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.add_new_fragment.*
 
 class NewPersonFragment : Fragment() {
-    companion object {
-        fun newInstance(): Fragment {
-            return NewPersonFragment()
-        }
-    }
 
     private lateinit var viewModel: NewPersonViewModel
 
@@ -68,12 +63,12 @@ class NewPersonFragment : Fragment() {
         }
     }
 
-    fun updateStatus(status: NewPersonViewModel.Status) {
+    private fun updateStatus(status: NewPersonViewModel.Status) {
         (activity as MainActivity).hideProgressScreen()
         val message = when (status) {
-            NewPersonViewModel.Status.DATA_ERROR -> "Данные введены не верно"
-            NewPersonViewModel.Status.ERROR -> "Ошибка создания объявления"
-            NewPersonViewModel.Status.SUCCESS -> "Объявление созданно успешно"
+            NewPersonViewModel.Status.DATA_ERROR -> getString(R.string.new_person_data_error)
+            NewPersonViewModel.Status.ERROR -> getString(R.string.new_person_error)
+            NewPersonViewModel.Status.SUCCESS -> getString(R.string.new_person_success)
         }
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         if (status != NewPersonViewModel.Status.DATA_ERROR) {
@@ -81,7 +76,7 @@ class NewPersonFragment : Fragment() {
         }
     }
 
-    fun loadImage(image: Bitmap?) {
+    private fun loadImage(image: Bitmap?) {
         clear.visibility = if (image == null) View.GONE else View.VISIBLE
         Glide.with(this).load(image).placeholder(R.drawable.default_img).into(photo)
     }

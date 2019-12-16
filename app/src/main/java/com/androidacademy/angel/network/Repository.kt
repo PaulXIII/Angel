@@ -37,25 +37,25 @@ object Repository {
             .child(DATA_ADVERTS)
         reference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                Log.e("TAG", "Error ${error.code} ")
-                Log.e("TAG", "Error ${error.message} ")
-                Log.e("TAG", "Error ${error.details} ")
+                Log.e(Const.TAG, "Error ${error.code} ")
+                Log.e(Const.TAG, "Error ${error.message} ")
+                Log.e(Const.TAG, "Error ${error.details} ")
             }
 
             override fun onDataChange(data: DataSnapshot) {
                 val res = mutableListOf<AdvertModel>()
                 data.children.forEach {
-                    Log.d("TAG", "Item key ${it.key}")
+                    Log.d(Const.TAG, "Item key ${it.key}")
                     val value = it.getValue(AdvertModel::class.java)
                     value?.run {
-                        Log.d("TAG", "Item title ${value.title}")
-                        Log.d("TAG", "Item url ${value.url}")
+                        Log.d(Const.TAG, "Item title ${value.title}")
+                        Log.d(Const.TAG, "Item url ${value.url}")
                         res.add(value)
                     }
                 }
                 advertsLiveData.postValue(res.sortedByDescending { item -> item.id })
-                Log.d("TAG", "Count ${data.childrenCount}")
-                Log.d("TAG", "Count ${data.key}")
+                Log.d(Const.TAG, "Count ${data.childrenCount}")
+                Log.d(Const.TAG, "Count ${data.key}")
             }
         })
     }
@@ -78,9 +78,9 @@ object Repository {
             .push()
             .setValue(newAdvert)
             .addOnSuccessListener {
-                Log.d("TAG", "Update advert success")
+                Log.d(Const.TAG, "Update advert success")
             }.addOnFailureListener {
-                Log.d("TAG", "Updated advert fail $it")
+                Log.d(Const.TAG, "Updated advert fail $it")
             }
     }
 
@@ -93,7 +93,7 @@ object Repository {
             completionListener(task.isSuccessful)
             if (task.isSuccessful) {
                 prefs.idClient = task.result?.user?.uid
-                Log.d("WTF", "${task.result?.user?.uid}")
+                Log.d(Const.TAG, "${task.result?.user?.uid}")
             }
         }
     }

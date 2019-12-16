@@ -16,7 +16,7 @@ import java.io.ByteArrayOutputStream
 
 class NewPersonViewModel : ViewModel() {
     var photoBitmap: MutableLiveData<Bitmap> = MutableLiveData()
-    val repository = Repository
+    private val repository = Repository
     var status: MutableLiveData<Status> = MutableLiveData()
 
     fun publish(title: String, description: String) {
@@ -60,8 +60,8 @@ class NewPersonViewModel : ViewModel() {
         fragment: Fragment,
         packageManager: PackageManager
     ) {
-        val photoTakerIntent: Intent = Intent(Intent.ACTION_PICK)
-        photoTakerIntent.setType("image/*")
+        val photoTakerIntent = Intent(Intent.ACTION_PICK)
+        photoTakerIntent.type = "image/*"
         fragment.startActivityForResult(photoTakerIntent, REQUEST_IMAGE_CAPTURE_GALLERIA)
     }
 

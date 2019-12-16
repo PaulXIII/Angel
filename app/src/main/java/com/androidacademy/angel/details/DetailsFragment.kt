@@ -43,7 +43,7 @@ class DetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        advertModel = arguments?.getParcelable<AdvertModel>(ADVERT_MODEL)
+        advertModel = arguments?.getParcelable(ADVERT_MODEL)
 
         advertModel?.let {
             Glide

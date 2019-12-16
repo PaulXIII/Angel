@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         fragmentController.nextFragment.observe(this, Observer<Fragment> {
             if (it == null)
-                throw IllegalArgumentException("Fragment can't be null")
+                throw IllegalArgumentException(getString(R.string.fragmenr_cant_be_null))
 
             if (it is AdvertisementFragmentList) {
                 showBackButtons(false)
@@ -83,10 +83,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
-        Log.d("WTF", "OnNewIntent")
-        val extras = intent?.extras
+        val extras: Bundle? = intent?.extras
         if (extras?.containsKey(INTENT_KEY) == true) {
-            Log.d("WTF", "${extras.getString(INTENT_KEY)}")
+            Log.d(Const.TAG, "${extras.getString(INTENT_KEY)}")
             fragmentController.openAdvertisementList()
         }
 
